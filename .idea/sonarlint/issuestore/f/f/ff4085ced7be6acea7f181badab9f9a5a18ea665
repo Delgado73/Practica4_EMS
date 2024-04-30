@@ -1,0 +1,32 @@
+
+†	java:S112I"FDefine and throw a dedicated exception instead of using a generic one.(üŠğ¨ùÿÿÿÿJ$ef790c98-2d08-4007-8cd4-aed9c2853844
+†	java:S112["FDefine and throw a dedicated exception instead of using a generic one.(“ÍÊ»ıÿÿÿÿJ$07daaae7-8aa7-4bb1-a210-78d7f35c58b2
+†	java:S112]"FDefine and throw a dedicated exception instead of using a generic one.(Äø¥¾ûÿÿÿÿJ$b7941ddb-ef5b-435d-8400-0665842f4e75
+	java:S112m"FDefine and throw a dedicated exception instead of using a generic one.(½éÖ…J$09d39b94-66c8-4269-b4d7-6453cd46a3cb
+€	java:S112|"FDefine and throw a dedicated exception instead of using a generic one.(·Ó±?J$42c5c526-6f2c-414a-9f14-48f9e2eddcc8
+‡	java:S112Œ"FDefine and throw a dedicated exception instead of using a generic one.(¦ÙºÿÿÿÿÿJ$fa55ee00-7c23-40af-a548-fe01bf553973
+‹
+java:S1104"OMake URL a static final constant or non-public and provide accessors if needed.(ï¹«™J$c8010263-f82f-43ea-a97b-e138d84763fd
+‘
+java:S1104"PMake USER a static final constant or non-public and provide accessors if needed.(¶Ò·úÿÿÿÿJ$4cd86822-1ccf-4394-b3ce-e82220d34e67
+‘
+java:S1104#"PMake PASS a static final constant or non-public and provide accessors if needed.(º¡ÑŞûÿÿÿÿJ$3aefe3f0-636f-415e-bcd2-3597d28446ef
+e
+java:S1444")Make this "public static URL" field final(ï¹«™J$7eacdca6-f641-44fa-a9fa-0b935953371c
+k
+java:S1444"*Make this "public static USER" field final(¶Ò·úÿÿÿÿJ$24a5cf0d-50f7-4577-80c6-bb6abb23c026
+k
+java:S1444#"*Make this "public static PASS" field final(º¡ÑŞûÿÿÿÿJ$4f75a132-4b88-4bea-9125-9ad117ec87f4
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(»ô¼€ûÿÿÿÿJ$4541c7b5-23db-42b8-8351-ea226783275f
+Š
+java:S3008"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï¹«™J$5f45ab58-5f17-4fed-a48d-df3f01f65867
+
+java:S3008"ORename this field "USER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶Ò·úÿÿÿÿJ$632bc3a3-1709-4f2c-ad48-595be339099e
+
+java:S3008#"ORename this field "PASS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º¡ÑŞûÿÿÿÿJ$e20c0f5b-513b-4e17-9fca-ce891a549c56
+f	java:S106j"+Replace this use of System.out by a logger.(Œª¯ J$0afabde4-b989-4927-bdea-d16d8ec4cb5a
+k	java:S106l"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿJ$56a3d50a-8c2d-4e15-bc79-9463c658b44a
+x	java:S125‹"<This block of commented-out lines of code should be removed.(§Ù¹ğJ$e4fc2d3c-27c6-4482-ae08-e4ea2bcc21a6
+g	java:S106˜"+Replace this use of System.out by a logger.(š ¤J$07cc5783-c858-4817-9080-14bef7e792a7
+g	java:S106š"+Replace this use of System.out by a logger.(”†İÅJ$ff4f3369-b0d7-46bd-a455-8c4b76524009
+l	java:S106"+Replace this use of System.out by a logger.(Á™âõıÿÿÿÿJ$843661a0-3b42-49f1-a8d8-cf1f0d4dd57d

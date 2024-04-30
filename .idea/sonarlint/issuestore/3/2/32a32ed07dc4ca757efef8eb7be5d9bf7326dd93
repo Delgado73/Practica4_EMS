@@ -1,4 +1,10 @@
 
+q
+java:S2095"OUse try-with-resources or close this "InputStreamReader" in a "finally" clause.(å¾¿üùÿÿÿÿ8Ùîßïò1
+n
+java:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(Íä“°şÿÿÿÿ8Úîßïò1
+o
+java:S2095"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(€ƒ ‘ûÿÿÿÿ8Úîßïò1
 \
 java:S1659 "ADeclare "user" and all following declarations on a separate line.(ä÷ºˆÿÿÿÿÿ
 Y
