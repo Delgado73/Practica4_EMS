@@ -38,7 +38,7 @@ public class ControladorProfesor {
 
         boolean ok;
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM profesor "
+                                            + "FROM PROFESOR "
                                             + "WHERE ((activo = 1) ");
         List<Object> values = new ArrayList<Object>();
             
@@ -148,7 +148,7 @@ public class ControladorProfesor {
     public void insertarEnTablaProfesor(Profesor profesor,
                                         DataAccessObject dataAccessObject) {
 
-        StringBuilder sql = new StringBuilder("INSERT profesor VALUES (?,?,?,?)");
+        StringBuilder sql = new StringBuilder("INSERT PROFESOR VALUES (?,?,?,?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
             stmt.setInt(1, profesor.getCodProfesor());
@@ -178,7 +178,7 @@ public class ControladorProfesor {
      */
     public void insertarEnTablaImparte(Profesor profesor, String cod_grupo_clase,
                                         DataAccessObject dataAccessObject) {
-        StringBuilder sql = new StringBuilder("INSERT imparte VALUES (?,?,?)");
+        StringBuilder sql = new StringBuilder("INSERT IMPARTE VALUES (?,?,?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         Curso curso = new Curso();
 
@@ -246,7 +246,7 @@ public class ControladorProfesor {
                 "UPDATE PROFESOR "
               + "SET activo = 1 "
               + "WHERE (Cod_P IN (SELECT DISTINCT PROFESOR_Cod_P "
-                                 +"FROM tutoria  "
+                                 +"FROM TUTORIA  "
                                  +"WHERE ((CURSO_Cod_CURSO = ?) "
                                  +"  AND (CONVOCATORIA_idCONVOCATORIA = ?)))"
                     + ")");
@@ -279,7 +279,7 @@ public class ControladorProfesor {
                 "UPDATE PROFESOR "
               + "SET activo = 1 "
               + "WHERE (Cod_P IN (SELECT DISTINCT PROFESOR_Cod_P "
-                                 +"FROM imparte  "
+                                 +"FROM IMPARTE  "
                                  +"WHERE ((CURSO_Cod_CURSO = ?)))"
                     + ")");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -304,7 +304,7 @@ public class ControladorProfesor {
      */
     public void eliminarImparticionesCursoActual(DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM imparte "
+                                            + "FROM IMPARTE "
                                             + "WHERE (CURSO_Cod_CURSO = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -339,7 +339,7 @@ public class ControladorProfesor {
 
         StringBuilder sql = new StringBuilder(
                                  "SELECT Cod_P "
-                               + "FROM profesor "
+                               + "FROM PROFESOR "
                                + "WHERE ((nombre = ?) AND (apellidos = ?))");
         List<Object> values = new ArrayList<Object>();
         values.add(profesor.getNombre());
@@ -391,7 +391,7 @@ public class ControladorProfesor {
                                             DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM imparte "
+                                            + "FROM IMPARTE "
                                             + "WHERE ((PROFESOR_Cod_P = ?) "
                                               + "AND (CURSO_Cod_CURSO = ?))");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -430,7 +430,7 @@ public class ControladorProfesor {
                                             DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE ((PROFESOR_Cod_P = ?) "
                                                + "AND (CURSO_Cod_CURSO = ?) "
                                                + "AND (CONVOCATORIA_idCONVOCATORIA = ?))");
@@ -470,7 +470,7 @@ public class ControladorProfesor {
                                             DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM imparte "
+                                            + "FROM IMPARTE "
                                             + "WHERE (PROFESOR_Cod_P = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -507,7 +507,7 @@ public class ControladorProfesor {
                                             DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE (PROFESOR_Cod_P = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -535,7 +535,7 @@ public class ControladorProfesor {
      */
     private void borrarEnTablaProfesor(int cod_profesor, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM profesor "
+                                            + "FROM PROFESOR "
                                             + "WHERE (Cod_P = ?)");
 
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -566,7 +566,7 @@ public class ControladorProfesor {
     private void borrarEnTablaImparte(int cod_profesor, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM imparte "
+                                            + "FROM IMPARTE "
                                             + "WHERE ((PROFESOR_Cod_P = ?) "
                                                + "AND (CURSO_Cod_CURSO = ?))");
 
@@ -601,7 +601,7 @@ public class ControladorProfesor {
     private void borrarEnTablaTutoria(int cod_profesor, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE ((PROFESOR_Cod_P = ?) "
                                                + "AND (CURSO_Cod_CURSO = ?))");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -665,9 +665,9 @@ public class ControladorProfesor {
     public int recuperarUltimoCodProfesor() {
 
         StringBuilder sql = new StringBuilder("SELECT Cod_P "
-                                            + "FROM profesor "
+                                            + "FROM PROFESOR "
                                             + "WHERE (Cod_P >= ALL (SELECT Cod_P"
-                                                                + " FROM profesor))");
+                                                                + " FROM PROFESOR))");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -805,38 +805,38 @@ public class ControladorProfesor {
                                            Profesor profesor, GrupoClase grupo_clase,
                                            DataAccessObject dataAccessObject) {
 
-        StringBuilder sql = new StringBuilder("SELECT profesor.Nombre, profesor.Apellidos, "
-                                                  + " imparte.GRUPO_CLASE_Cod_GC,"
-                                                  + " profesor.Cod_P "
-                                            + "FROM profesor, imparte "
-                                            + "WHERE ( (profesor.activo = 1) "
-                                               + " AND (imparte.CURSO_Cod_CURSO = ?) ");
+        StringBuilder sql = new StringBuilder("SELECT PROFESOR.Nombre, PROFESOR.Apellidos, "
+                                                  + " IMPARTE.GRUPO_CLASE_Cod_GC,"
+                                                  + " PROFESOR.Cod_P "
+                                            + "FROM PROFESOR, IMPARTE "
+                                            + "WHERE ( (PROFESOR.activo = 1) "
+                                               + " AND (IMPARTE.CURSO_Cod_CURSO = ?) ");
 
         List<Object> values = new ArrayList<Object>();
         Curso curso = new Curso();
         values.add(curso.getCursoActual());
 
         if (this.noEstaVacio(profesor.getNombre())){
-            sql.append(" AND (profesor.Nombre = ?) ");
+            sql.append(" AND (PROFESOR.Nombre = ?) ");
             values.add(this.obtenerCodigoProfesor(profesor, dataAccessObject));
         }
 
         if (this.noEstaVacio(profesor.getApellidos())) {
    
-            sql.append(" AND (profesor.Apellidos = ?) ");
+            sql.append(" AND (PROFESOR.Apellidos = ?) ");
             values.add(profesor.getApellidos());
         }
 
         if (this.noEstaVacio(grupo_clase.getCodGrupoClase())) {
             sql.append(" AND (Cod_P IN (SELECT PROFESOR_Cod_P "
-                                     + "FROM imparte "
+                                     + "FROM IMPARTE "
                                      + "WHERE (GRUPO_CLASE_Cod_GC = ?)"
                                      + ")"
                            + ")");
             values.add(grupo_clase.getCodGrupoClase());
         }
 
-        sql.append(" AND (imparte.PROFESOR_Cod_P = profesor.Cod_P)) ");
+        sql.append(" AND (IMPARTE.PROFESOR_Cod_P = PROFESOR.Cod_P)) ");
         
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         
@@ -907,35 +907,34 @@ public class ControladorProfesor {
      * 
      * @param resultado Estructura con la que se devolverá el resultado.
      * @param profesor contiene la información de los filtros aplicados a profesor.
-     * @param grupo_clase contiene la información de los filtros aplicados a grupo de clase.
      * @param dataAccessObject objeto con el que gestionamos el acceso a la
      *        Base de Datos.
      */
     private void anyadirProfesorSinClases(List<ListadoProfesor> resultado,
                                          Profesor profesor, 
                                          DataAccessObject dataAccessObject) {
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT profesor.Nombre, "
-                                                           + " profesor.Apellidos, "
-                                                           + " profesor.Cod_P "
-                                             +" FROM profesor, imparte "
-                                            + " WHERE ((profesor.activo = 1) ");
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT PROFESOR.Nombre, "
+                                                           + " PROFESOR.Apellidos, "
+                                                           + " PROFESOR.Cod_P "
+                                             +" FROM PROFESOR, IMPARTE "
+                                            + " WHERE ((PROFESOR.activo = 1) ");
 
         List<Object> values = new ArrayList<Object>();
 
         if (this.noEstaVacio(profesor.getNombre())){
-            sql.append(" AND (profesor.Nombre = ?) ");
+            sql.append(" AND (PROFESOR.Nombre = ?) ");
             values.add(profesor.getNombre());
         }
 
         if (this.noEstaVacio(profesor.getApellidos())) {
 
-            sql.append(" AND (profesor.Apellidos = ?) ");
+            sql.append(" AND (PROFESOR.Apellidos = ?) ");
             values.add(profesor.getApellidos());
         }
 
-        sql.append(" AND (profesor.Cod_P NOT IN (SELECT imparte.PROFESOR_Cod_P "
-                                               +"FROM imparte "
-                                               +"WHERE ((imparte.CURSO_Cod_CURSO = ?))))) ");
+        sql.append(" AND (PROFESOR.Cod_P NOT IN (SELECT IMPARTE.PROFESOR_Cod_P "
+                                               +"FROM IMPARTE "
+                                               +"WHERE ((IMPARTE.CURSO_Cod_CURSO = ?))))) ");
         Curso curso = new Curso();
         values.add(curso.getCursoActual());
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -992,7 +991,7 @@ public class ControladorProfesor {
     public String obtenerNombreProfesor(int codigo, DataAccessObject dataAccessObject) {
         
         StringBuilder sql = new StringBuilder("SELECT Nombre "
-                                            + "FROM profesor "
+                                            + "FROM PROFESOR "
                                             + "WHERE (Cod_P = ?) ");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -1024,7 +1023,7 @@ public class ControladorProfesor {
      */
     public String obtenerApellidosProfesor(int codigo, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT Apellidos "
-                                            + "FROM profesor "
+                                            + "FROM PROFESOR "
                                             + "WHERE (Cod_P = ?) ");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {

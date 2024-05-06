@@ -272,15 +272,15 @@ public class ControladorGrupoPractica {
                                                             GrupoPractica grupo,
                                                             String dni) {
 
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT  evaluacion.ALUMNO_DNI, "
-                                                            + " evaluacion.GRUPO_PRACTICA_Cod_GP,"
-                                                            + " tutoria.PROFESOR_Cod_P, "
-                                                            + " evaluacion.Nota_Pr "
-                                            + "FROM evaluacion, tutoria "
-                                            + "WHERE ((tutoria.CURSO_Cod_CURSO = ?) "
-                                              + " AND (tutoria.CONVOCATORIA_idCONVOCATORIA = ?) "
-                                              + " AND (evaluacion.CURSO_Cod_CURSO = ?) "
-                                              + " AND (evaluacion.CONVOCATORIA_idCONVOCATORIA = ?) ");
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT  EVALUACION.ALUMNO_DNI, "
+                                                            + " EVALUACION.GRUPO_PRACTICA_Cod_GP,"
+                                                            + " TUTORIA.PROFESOR_Cod_P, "
+                                                            + " EVALUACION.Nota_Pr "
+                                            + "FROM EVALUACION, TUTORIA "
+                                            + "WHERE ((TUTORIA.CURSO_Cod_CURSO = ?) "
+                                              + " AND (TUTORIA.CONVOCATORIA_idCONVOCATORIA = ?) "
+                                              + " AND (EVALUACION.CURSO_Cod_CURSO = ?) "
+                                              + " AND (EVALUACION.CONVOCATORIA_idCONVOCATORIA = ?) ");
 
         List<Object> values = new ArrayList<Object>();
         List<ListadoGrupoPractica> resultado = new ArrayList<ListadoGrupoPractica>();
@@ -301,12 +301,12 @@ public class ControladorGrupoPractica {
         }
 
         if (this.noEstaVacio(dni)) {
-            sql.append(" AND (evaluacion.GRUPO_PRACTICA_Cod_GP = ");
-            sql.append("         (SELECT evaluacion.GRUPO_PRACTICA_Cod_GP ");
-            sql.append("          FROM evaluacion ");
-            sql.append("          WHERE ((evaluacion.ALUMNO_DNI = ?) "
-                    + "              AND (evaluacion.CURSO_Cod_CURSO = ?) "
-                    + "              AND (evaluacion.CONVOCATORIA_idCONVOCATORIA = ?))))  ");
+            sql.append(" AND (EVALUACION.GRUPO_PRACTICA_Cod_GP = ");
+            sql.append("         (SELECT EVALUACION.GRUPO_PRACTICA_Cod_GP ");
+            sql.append("          FROM EVALUACION ");
+            sql.append("          WHERE ((EVALUACION.ALUMNO_DNI = ?) "
+                    + "              AND (EVALUACION.CURSO_Cod_CURSO = ?) "
+                    + "              AND (EVALUACION.CONVOCATORIA_idCONVOCATORIA = ?))))  ");
             values.add(dni);
             values.add(curso_actual);
             values.add(convocatoria_actual);
@@ -315,11 +315,11 @@ public class ControladorGrupoPractica {
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         ControladorProfesor DAOProfesor = new ControladorProfesor();
         if (grupo.getTutor() != null) {
-            sql.append(" AND (tutoria.PROFESOR_Cod_P = ?) ");
+            sql.append(" AND (TUTORIA.PROFESOR_Cod_P = ?) ");
             values.add(DAOProfesor.obtenerCodigoProfesor(grupo.getTutor(), dataAccessObject));
         } 
-        sql.append(" AND (evaluacion.GRUPO_PRACTICA_Cod_GP = tutoria.GRUPO_PRACTICA_Cod_GP)) "
-                 + " ORDER BY (tutoria.GRUPO_PRACTICA_Cod_GP) ");
+        sql.append(" AND (EVALUACION.GRUPO_PRACTICA_Cod_GP = TUTORIA.GRUPO_PRACTICA_Cod_GP)) "
+                 + " ORDER BY (TUTORIA.GRUPO_PRACTICA_Cod_GP) ");
 
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try{
@@ -343,8 +343,8 @@ public class ControladorGrupoPractica {
                 int grupo_practica2 = -2;
                 int cod_tutor = -1;
                 int cod_tutor2 = -1;
-                Float nota = new Float(0);
-                Float nota2 = new Float(0);
+                Float nota =  Float.valueOf(0);
+                Float nota2 = Float.valueOf(0);
 
                 dni_alumno = rs.getString(1);
                 grupo_practica = rs.getInt(2);
@@ -488,7 +488,7 @@ public class ControladorGrupoPractica {
      */
     public boolean noEstaDadoDeAlta(GrupoPractica grupo, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM grupo_practica "
+                                            + "FROM GRUPO_PRACTICA "
                                             + "WHERE (Cod_GP = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -564,7 +564,7 @@ public class ControladorGrupoPractica {
                 "UPDATE GRUPO_PRACTICA "
               + "SET activo = 1 "
               + "WHERE (Cod_GP IN (SELECT DISTINCT GRUPO_PRACTICA_Cod_GP "
-                                 +"FROM tutoria  "
+                                 +"FROM TUTORIA  "
                                  +"WHERE ((CURSO_Cod_CURSO = ?) "
                                  + "  AND (CONVOCATORIA_idCONVOCATORIA = ?)))"
                     + ")");
@@ -621,7 +621,7 @@ public class ControladorGrupoPractica {
      */
     private boolean estaActivo(GrupoPractica grupo, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM grupo_practica "
+                                            + "FROM GRUPO_PRACTICA "
                                             + "WHERE ((Cod_GP = ?) AND (activo = 1))");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {

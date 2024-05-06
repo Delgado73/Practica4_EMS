@@ -27,7 +27,7 @@ public class ControladorCurso {
      */
     public void insertarEnTablaCurso(Curso curso) {
 
-        StringBuilder sql = new StringBuilder("INSERT curso "
+        StringBuilder sql = new StringBuilder("INSERT CURSO "
                                             + "VALUES (?,?)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -58,7 +58,7 @@ public class ControladorCurso {
 
         int cursoActual;
         StringBuilder sql = new StringBuilder("SELECT Cod_CURSO "
-                                            + "FROM curso "
+                                            + "FROM CURSO "
                                             + "WHERE (actual = 1)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -88,7 +88,7 @@ public class ControladorCurso {
      */
     public void eliminarCurso(int curso_actual) {
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM curso "
+                                            + "FROM CURSO "
                                             + "WHERE (Cod_CURSO = ?)");
 
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();

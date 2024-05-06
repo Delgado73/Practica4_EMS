@@ -40,7 +40,7 @@ public class ControladorAlumno {
     public boolean estaDadoDeAlta(Alumno alumno) {
 
         StringBuilder sql = new StringBuilder("SELECT DNI "
-                                           + "FROM alumno "
+                                           + "FROM ALUMNO "
                                            + "WHERE (DNI = ?)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -74,7 +74,7 @@ public class ControladorAlumno {
      */
     public boolean estaDadoDeAltaEnCursoActual(Alumno alumno) {
         StringBuilder sql = new StringBuilder("SELECT ALUMNO_DNI "
-                                           + "FROM matricula "
+                                           + "FROM MATRICULA "
                                            + "WHERE ((ALUMNO_DNI = ?) "
                                            + "   AND (CURSO_Cod_CURSO = ?))");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
@@ -130,7 +130,7 @@ public class ControladorAlumno {
     public boolean numMatriculaEstaDadaDeAlta(Alumno alumno) {
 
         StringBuilder sql = new StringBuilder("SELECT N_Mat "
-                                           + "FROM alumno "
+                                           + "FROM ALUMNO "
                                            + "WHERE (N_Mat = ?)");
 
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
@@ -164,11 +164,11 @@ public class ControladorAlumno {
      *         Si ocurre algún error, se lanzará una excepción.
      */
     public boolean numMatriculaEstaDadaDeAltaEnCursoActual(Alumno alumno) {
-        StringBuilder sql = new StringBuilder("SELECT alumno.N_Mat "
-                                           + "FROM alumno, matricula "
-                                           + "WHERE ((alumno.N_Mat = ?) "
-                                           + "   AND (matricula.ALUMNO_DNI = alumno.DNI) "
-                                           + "   AND (matricula.CURSO_Cod_CURSO = ?))");
+        StringBuilder sql = new StringBuilder("SELECT ALUMNO.N_Mat "
+                                           + "FROM ALUMNO, MATRICULA "
+                                           + "WHERE ((ALUMNO.N_Mat = ?) "
+                                           + "   AND (MATRICULA.ALUMNO_DNI = ALUMNO.DNI) "
+                                           + "   AND (MATRICULA.CURSO_Cod_CURSO = ?))");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -205,7 +205,7 @@ public class ControladorAlumno {
     public boolean estaDadoDeAlta(Alumno alumno, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT DNI "
-                                           + "FROM alumno "
+                                           + "FROM ALUMNO "
                                            + "WHERE (DNI = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -346,7 +346,7 @@ public class ControladorAlumno {
     private void borrarEnTablaAlumno(String dni, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM alumno "
+                                            + "FROM ALUMNO "
                                             + "WHERE (DNI = ?)");
 
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -416,16 +416,16 @@ public class ControladorAlumno {
 
         boolean primeraClausulaWhere = true;
         
-        StringBuilder sql = new StringBuilder(" SELECT alumno.DNI, alumno.N_Mat, "
-                                                   + " alumno.Nombre, "
-                                                   + " alumno.Apellidos, "
-                                                   + " matricula.GRUPO_CLASE_Cod_GC "
-                                            + " FROM alumno, matricula ");
+        StringBuilder sql = new StringBuilder(" SELECT ALUMNO.DNI, ALUMNO.N_Mat, "
+                                                   + " ALUMNO.Nombre, "
+                                                   + " ALUMNO.Apellidos, "
+                                                   + " MATRICULA.GRUPO_CLASE_Cod_GC "
+                                            + " FROM ALUMNO, MATRICULA ");
 
         List<Object> values = new ArrayList<Object>();
         
         if (this.noEstaVacio(alumno.getDNI())){
-            sql.append("WHERE ((alumno.DNI = ?) ");
+            sql.append("WHERE ((ALUMNO.DNI = ?) ");
             values.add(alumno.getDNI());
             primeraClausulaWhere = false;
         }
@@ -436,7 +436,7 @@ public class ControladorAlumno {
             } else {
                 sql.append("WHERE (");
             }
-            sql.append(" (alumno.N_Mat = ?) ");
+            sql.append(" (ALUMNO.N_Mat = ?) ");
             values.add(alumno.getN_Mat());
             primeraClausulaWhere = false;
         }
@@ -448,8 +448,8 @@ public class ControladorAlumno {
             } else {
                 sql.append("WHERE (");
             }
-            sql.append(" (alumno.DNI IN (SELECT ALUMNO_DNI "
-                                      + "FROM matricula "
+            sql.append(" (ALUMNO.DNI IN (SELECT ALUMNO_DNI "
+                                      + "FROM MATRICULA "
                                       + "WHERE ((GRUPO_CLASE_Cod_GC = ?) "
                                              + "AND (CURSO_Cod_CURSO = ?))"
                                       + ")"
@@ -466,7 +466,7 @@ public class ControladorAlumno {
         } else {
             sql.append("WHERE (");
         }
-        sql.append(" (matricula.ALUMNO_DNI = alumno.DNI)) ");
+        sql.append(" (MATRICULA.ALUMNO_DNI = ALUMNO.DNI)) ");
 
        
         List<ListadoAlumno> resultado = new ArrayList<ListadoAlumno>();
@@ -539,30 +539,30 @@ public class ControladorAlumno {
                                                                         String convocatoria,
                                                                         int curso) {
 
-        StringBuilder sql = new StringBuilder("SELECT evaluacion.ALUMNO_DNI, "
-                                                   + "evaluacion.CURSO_Cod_CURSO, "
-                                                   + "evaluacion.CONVOCATORIA_idCONVOCATORIA, "
-                                                   + "evaluacion.Nota_P1, evaluacion.Nota_P2, "
-                                                   + "evaluacion.Nota_P3, evaluacion.Nota_P4, "
-                                                   + "evaluacion.Nota_Pr, evaluacion.Nota_Final "
-                                            + "FROM evaluacion, alumno "
-                                            + "WHERE ((alumno.DNI = evaluacion.ALUMNO_DNI) ");
+        StringBuilder sql = new StringBuilder("SELECT EVALUACION.ALUMNO_DNI, "
+                                                   + "EVALUACION.CURSO_Cod_CURSO, "
+                                                   + "EVALUACION.CONVOCATORIA_idCONVOCATORIA, "
+                                                   + "EVALUACION.Nota_P1, EVALUACION.Nota_P2, "
+                                                   + "EVALUACION.Nota_P3, EVALUACION.Nota_P4, "
+                                                   + "EVALUACION.Nota_Pr, EVALUACION.Nota_Final "
+                                            + "FROM EVALUACION, ALUMNO "
+                                            + "WHERE ((ALUMNO.DNI = EVALUACION.ALUMNO_DNI) ");
 
         List<Object> values = new ArrayList<Object>();
         List<ListadoHistoricoAlumno> resultado = new ArrayList<ListadoHistoricoAlumno>();
 
         if (this.noEstaVacio(dni_alumno)) {
-            sql.append(" AND (evaluacion.ALUMNO_DNI = ?) ");
+            sql.append(" AND (EVALUACION.ALUMNO_DNI = ?) ");
             values.add(dni_alumno);
         }
 
         if (this.noEstaVacio(convocatoria)) {
-            sql.append(" AND (evaluacion.CONVOCATORIA_idCONVOCATORIA = ?) ");
+            sql.append(" AND (EVALUACION.CONVOCATORIA_idCONVOCATORIA = ?) ");
             values.add(convocatoria);
         }
 
         if (curso != -1) {
-            sql.append(" AND (evaluacion.CURSO_Cod_CURSO = ?) ");
+            sql.append(" AND (EVALUACION.CURSO_Cod_CURSO = ?) ");
             values.add(curso);
         }
 
@@ -620,7 +620,7 @@ public class ControladorAlumno {
      */
     public String obtenerNombreAlumno(String dni, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT Nombre "
-                                            + "FROM alumno "
+                                            + "FROM ALUMNO "
                                             + "WHERE (dni = ?) ");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -652,7 +652,7 @@ public class ControladorAlumno {
      */
     public String obtenerApellidosAlumno(String dni,DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT Apellidos "
-                                            + "FROM alumno "
+                                            + "FROM ALUMNO "
                                             + "WHERE (DNI = ?) ");;
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -684,7 +684,7 @@ public class ControladorAlumno {
      */
     public String obtenerNumMatriculaAlumno(String dni, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("SELECT N_Mat "
-                                            + "FROM alumno "
+                                            + "FROM ALUMNO "
                                             + "WHERE (dni = ?) ");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {

@@ -186,7 +186,7 @@ public class ControladorEvaluacion {
     public void eliminarEvaluacionesConvocatoriaActual(DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM evaluacion "
+                                            + "FROM EVALUACION "
                                             + "WHERE ((CURSO_Cod_CURSO = ?) "
                                             + "AND (CONVOCATORIA_idCONVOCATORIA = ?))");
 
@@ -224,7 +224,7 @@ public class ControladorEvaluacion {
         
         StringBuilder sql = new StringBuilder(
                      "SELECT * "
-                   + "FROM evaluacion "
+                   + "FROM EVALUACION "
                    + "WHERE ((ALUMNO_DNI = ?) AND (CURSO_Cod_CURSO = ?) "
                    + "AND (CONVOCATORIA_idCONVOCATORIA = ?))");
 
@@ -259,9 +259,9 @@ public class ControladorEvaluacion {
         int ultimo_cod = 0;
         StringBuilder sql = new StringBuilder (
                      "SELECT Cod_Evaluacion "
-                   + "FROM evaluacion "
+                   + "FROM EVALUACION "
                    + "WHERE (Cod_Evaluacion >= ALL (SELECT Cod_Evaluacion"
-                                                + " FROM evaluacion))");
+                                                + " FROM EVALUACION))");
 
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -306,7 +306,7 @@ public class ControladorEvaluacion {
         boolean ok;
         StringBuilder sql = new StringBuilder (
                         "SELECT * "
-                      + "FROM evaluacion "
+                      + "FROM EVALUACION "
                       + "WHERE ((ALUMNO_DNI = ?) AND (CURSO_Cod_CURSO = ?) "
                       + "AND (CONVOCATORIA_idCONVOCATORIA = ?) "
                       + "AND ((Nota_P1 + Nota_P2 + Nota_P3 + Nota_P4) >= 5))");
@@ -354,7 +354,7 @@ public class ControladorEvaluacion {
         boolean ok;
         StringBuilder sql = new StringBuilder (
                         "SELECT * "
-                      + "FROM evaluacion "
+                      + "FROM EVALUACION "
                       + "WHERE ((ALUMNO_DNI = ?) AND (CURSO_Cod_CURSO = ?) "
                       + "AND (CONVOCATORIA_idCONVOCATORIA = ?) "
                       + "AND (Nota_Pr >= 5))");
@@ -403,7 +403,7 @@ public class ControladorEvaluacion {
         float nota = 0;
         StringBuilder sql = new StringBuilder(
                 "SELECT Nota_P1, Nota_P2, Nota_P3, Nota_P4 "
-              + "FROM evaluacion "
+              + "FROM EVALUACION "
               + "WHERE ((ALUMNO_DNI = ?) AND (CURSO_Cod_CURSO = ?) "
                       + "AND (CONVOCATORIA_idCONVOCATORIA = ?)"
                       + "AND ((Nota_P1 + Nota_P2 + Nota_P3 + Nota_P4) >= 5))");
@@ -455,7 +455,7 @@ public class ControladorEvaluacion {
         float nota = 0;
         StringBuilder sql = new StringBuilder(
                 "SELECT Nota_Pr "
-              + "FROM evaluacion "
+              + "FROM EVALUACION "
               + "WHERE ((ALUMNO_DNI = ?) AND (CURSO_Cod_CURSO = ?) "
                       + "AND (CONVOCATORIA_idCONVOCATORIA = ?)"
                       + "AND (Nota_Pr >= 5))");
@@ -534,7 +534,7 @@ public class ControladorEvaluacion {
     public void borrarEnTablaEvaluacion(String dni, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM evaluacion "
+                                            + "FROM EVALUACION "
                                             + "WHERE (ALUMNO_DNI = ?)");
 
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -597,7 +597,7 @@ public class ControladorEvaluacion {
     public boolean estaRegistradoGrupoPractica(GrupoPractica grupo) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM evaluacion "
+                                            + "FROM EVALUACION "
                                             + "WHERE ((GRUPO_PRACTICA_Cod_GP = ?) "
                                              + " AND (CURSO_Cod_CURSO = ?) "
                                              + " AND (CONVOCATORIA_idCONVOCATORIA = ?))");
@@ -639,7 +639,7 @@ public class ControladorEvaluacion {
      */
     public boolean alumnoTieneGrupoPractica(Alumno alumno, DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder(" SELECT GRUPO_PRACTICA_Cod_GP "
-                                            + " FROM evaluacion "
+                                            + " FROM EVALUACION "
                                             + " WHERE ((ALUMNO_DNI = ?) "
                                                 + " AND (CURSO_Cod_CURSO = ?) "
                                                 + " AND (CONVOCATORIA_idCONVOCATORIA = ?))");
@@ -686,7 +686,7 @@ public class ControladorEvaluacion {
                                            String convocatoria_anterior,
                                            DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder(" SELECT EXAMEN_Cod_Ex "
-                                            + " FROM evaluacion "
+                                            + " FROM EVALUACION "
                                             + " WHERE ((ALUMNO_DNI = ?) "
                                                 + " AND (CURSO_Cod_CURSO = ?) "
                                                 + " AND (CONVOCATORIA_idCONVOCATORIA = ?))");
@@ -733,7 +733,7 @@ public class ControladorEvaluacion {
                                              String convocatoria_anterior,
                                              DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder(" SELECT PRACTICA_Cod_Practica "
-                                            + " FROM evaluacion "
+                                            + " FROM EVALUACION "
                                             + " WHERE ((ALUMNO_DNI = ?) "
                                                 + " AND (CURSO_Cod_CURSO = ?) "
                                                 + " AND (CONVOCATORIA_idCONVOCATORIA = ?))");
@@ -787,27 +787,27 @@ public class ControladorEvaluacion {
                                                                int curso) {
         boolean filtro_curso = false;
         boolean filtro_convocatoria = false;
-        StringBuilder sql = new StringBuilder("SELECT evaluacion.Cod_Evaluacion, "
-                                                  + " evaluacion.ALUMNO_DNI, "
-                                                  + " evaluacion.TIPO_EVALUACION_Ev_Continua, "
-                                                  + " evaluacion.Nota_Pr, "
-                                                  + " evaluacion.Nota_Ev_C, "
-                                                  + " evaluacion.Nota_P1, "
-                                                  + " evaluacion.Nota_P2, "
-                                                  + " evaluacion.Nota_P3, "
-                                                  + " evaluacion.Nota_P4, "
-                                                  + " evaluacion.Nota_Final, "
-                                                  + " evaluacion.Practica_convalidada, "
-                                                  + " evaluacion.Examen_convalidado, "
-                                                  + " evaluacion.CONVOCATORIA_idCONVOCATORIA, "
-                                                  + " evaluacion.CURSO_Cod_CURSO, "
-                                                  + " evaluacion.EXAMEN_Cod_Ex, "
-                                                  + " evaluacion.PRACTICA_Cod_Practica, "
-                                                  + " alumno.N_Mat "
-                                            + "FROM evaluacion, alumno, matricula "
-                                            + "WHERE ((evaluacion.ALUMNO_DNI = alumno.DNI) "
-                                            + " AND (evaluacion.ALUMNO_DNI = matricula.ALUMNO_DNI) "
-                                            + " AND (evaluacion.CURSO_Cod_CURSO = matricula.CURSO_Cod_CURSO) ");
+        StringBuilder sql = new StringBuilder("SELECT EVALUACION.Cod_Evaluacion, "
+                                                  + " EVALUACION.ALUMNO_DNI, "
+                                                  + " EVALUACION.TIPO_EVALUACION_Ev_Continua, "
+                                                  + " EVALUACION.Nota_Pr, "
+                                                  + " EVALUACION.Nota_Ev_C, "
+                                                  + " EVALUACION.Nota_P1, "
+                                                  + " EVALUACION.Nota_P2, "
+                                                  + " EVALUACION.Nota_P3, "
+                                                  + " EVALUACION.Nota_P4, "
+                                                  + " EVALUACION.Nota_Final, "
+                                                  + " EVALUACION.Practica_convalidada, "
+                                                  + " EVALUACION.Examen_convalidado, "
+                                                  + " EVALUACION.CONVOCATORIA_idCONVOCATORIA, "
+                                                  + " EVALUACION.CURSO_Cod_CURSO, "
+                                                  + " EVALUACION.EXAMEN_Cod_Ex, "
+                                                  + " EVALUACION.PRACTICA_Cod_Practica, "
+                                                  + " ALUMNO.N_Mat "
+                                            + "FROM EVALUACION, ALUMNO, MATRICULA "
+                                            + "WHERE ((EVALUACION.ALUMNO_DNI = ALUMNO.DNI) "
+                                            + " AND (EVALUACION.ALUMNO_DNI = MATRICULA.ALUMNO_DNI) "
+                                            + " AND (EVALUACION.CURSO_Cod_CURSO = MATRICULA.CURSO_Cod_CURSO) ");
 
 
         List<Object> values = new ArrayList<Object>();
@@ -816,32 +816,32 @@ public class ControladorEvaluacion {
 
         if (this.noEstaVacio(convocatoria)) {
             filtro_convocatoria = true;
-            sql.append(" AND (evaluacion.CONVOCATORIA_idCONVOCATORIA = ?) ");
+            sql.append(" AND (EVALUACION.CONVOCATORIA_idCONVOCATORIA = ?) ");
             values.add(convocatoria);            
         }
 
         if (curso != -1) {
             filtro_curso = true;
-            sql.append( " AND (evaluacion.CURSO_Cod_CURSO = ?) ");
+            sql.append( " AND (EVALUACION.CURSO_Cod_CURSO = ?) ");
             values.add(curso);
         }
 
         if (this.noEstaVacio(dni)) {
-            sql.append(" AND (evaluacion.ALUMNO_DNI = ?) ");
+            sql.append(" AND (EVALUACION.ALUMNO_DNI = ?) ");
             values.add(dni);
         }
 
         if (this.noEstaVacio(n_mat)) {
-            sql.append(" AND (evaluacion.ALUMNO_DNI = (SELECT DNI "
-                                                   + " FROM alumno "
+            sql.append(" AND (EVALUACION.ALUMNO_DNI = (SELECT DNI "
+                                                   + " FROM ALUMNO "
                                                    + " WHERE (N_Mat = ?))) ");
             values.add(n_mat);
         }
 
         if (this.noEstaVacio(grupo_clase)) {
-            sql.append(" AND (evaluacion.ALUMNO_DNI IN (SELECT ALUMNO_DNI "
-                                                     +" FROM matricula "
-                                                     +" WHERE (matricula.GRUPO_CLASE_Cod_GC = ?))) ");
+            sql.append(" AND (EVALUACION.ALUMNO_DNI IN (SELECT ALUMNO_DNI "
+                                                     +" FROM MATRICULA "
+                                                     +" WHERE (MATRICULA.GRUPO_CLASE_Cod_GC = ?))) ");
             values.add(grupo_clase);
         }
 
@@ -857,7 +857,7 @@ public class ControladorEvaluacion {
             sql.append(" CONVOCATORIA_idCONVOCATORIA DESC, ");
         }
 
-        sql.append(" alumno.N_Mat ASC ");
+        sql.append(" ALUMNO.N_Mat ASC ");
 
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());

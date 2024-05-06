@@ -30,7 +30,7 @@ public class ControladorConvocatoria {
 
         String convocatoriaActual = null;
         StringBuilder sql = new StringBuilder("SELECT idCONVOCATORIA "
-                                            + "FROM convocatoria "
+                                            + "FROM CONVOCATORIA "
                                             + "WHERE (actual = 1)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());

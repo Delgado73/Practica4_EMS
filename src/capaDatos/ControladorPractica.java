@@ -20,7 +20,7 @@ public class ControladorPractica {
      *  para una nueva convocatoria. Si ocurre algún error, lanzará una excepción.
      */
     public void darAltaNuevoCodPractica() {
-        StringBuilder sql = new StringBuilder("INSERT practica "
+        StringBuilder sql = new StringBuilder("INSERT PRACTICA "
                                             + "VALUES (?)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -48,7 +48,7 @@ public class ControladorPractica {
      */
     public void bajaCodPracticaConvocatoriaActual(DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM practica "
+                                            + "FROM PRACTICA "
                                             + "WHERE (Cod_Practica = ?) ");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {

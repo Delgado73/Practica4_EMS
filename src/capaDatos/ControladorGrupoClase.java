@@ -33,7 +33,7 @@ public class ControladorGrupoClase {
                                   DataAccessObject dataAccessObject) {
         
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM grupo_clase "
+                                            + "FROM GRUPO_CLASE "
                                             + " WHERE ((Cod_GC = ?))");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 

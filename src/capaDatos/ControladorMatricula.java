@@ -31,9 +31,9 @@ public class ControladorMatricula {
 
         StringBuilder sql = new StringBuilder (
                      "SELECT Cod_MATRICULA "
-                   + "FROM matricula "
+                   + "FROM MATRICULA "
                    + "WHERE (Cod_MATRICULA >= ALL (SELECT Cod_MATRICULA"
-                                               + " FROM matricula))");
+                                               + " FROM MATRICULA))");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -75,7 +75,7 @@ public class ControladorMatricula {
         }
         
 
-        StringBuilder sql = new StringBuilder("INSERT matricula VALUES (?,?,?,?)");
+        StringBuilder sql = new StringBuilder("INSERT MATRICULA VALUES (?,?,?,?)");
            
         try {
             PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -102,7 +102,7 @@ public class ControladorMatricula {
      */
     public void eliminarMatriculasCursoActual(DataAccessObject dataAccessObject) {
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM matricula "
+                                            + "FROM MATRICULA "
                                             + "WHERE (CURSO_Cod_CURSO = ?)");
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
 
@@ -130,7 +130,7 @@ public class ControladorMatricula {
     public void borrarEnTablaMatricula(String dni, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM matricula "
+                                            + "FROM MATRICULA "
                                             + "WHERE (ALUMNO_DNI = ?)");
 
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -162,7 +162,7 @@ public class ControladorMatricula {
     public boolean estaDadaDeAlta(Matricula matricula, DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM matricula "
+                                            + "FROM MATRICULA "
                                             + "WHERE ((ALUMNO_DNI = ?) "
                                                    + "AND (CURSO_Cod_CURSO = ?))");
 

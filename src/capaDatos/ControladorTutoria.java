@@ -71,7 +71,7 @@ public class ControladorTutoria {
     public void eliminarTutoriasConvocatoriaActual(DataAccessObject dataAccessObject) {
 
         StringBuilder sql = new StringBuilder("DELETE "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE ((CURSO_Cod_CURSO = ?) "
                                             + "AND (CONVOCATORIA_idCONVOCATORIA = ?))");
 
@@ -104,7 +104,7 @@ public class ControladorTutoria {
      */
     public boolean tieneTutorias(Profesor profesor) {
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE (PROFESOR_Cod_P = ?) ");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
@@ -135,9 +135,9 @@ public class ControladorTutoria {
      */
     public int recuperarUltimoCodTutoria() {
         StringBuilder sql = new StringBuilder("SELECT Cod_TUTORIA "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE (Cod_TUTORIA >= ALL (SELECT Cod_TUTORIA"
-                                                                + " FROM tutoria))");
+                                                                + " FROM TUTORIA))");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
         try {
@@ -171,7 +171,7 @@ public class ControladorTutoria {
     public boolean estaRegistradoGrupoPractica(GrupoPractica grupo) {
 
         StringBuilder sql = new StringBuilder("SELECT * "
-                                            + "FROM tutoria "
+                                            + "FROM TUTORIA "
                                             + "WHERE (GRUPO_PRACTICA_Cod_GP = ?)");
         DataAccessObject dataAccessObject = DataAccessObject.getDataAccessObjectConnected();
         PreparedStatement stmt = dataAccessObject.getPreparedStatement(sql.toString());
