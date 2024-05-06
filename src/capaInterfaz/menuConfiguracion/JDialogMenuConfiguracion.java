@@ -278,7 +278,7 @@ public class JDialogMenuConfiguracion extends javax.swing.JDialog {
              //   DataAccessObject.USER = this.User;
               //  DataAccessObject.PASS = this.Password;
                 try {
-                    BufferedWriter escritor = new BufferedWriter(new  OutputStreamWriter(new FileOutputStream("./src/config/config.txt"),"UTF8"));
+                    BufferedWriter escritor = new BufferedWriter(new  OutputStreamWriter(new FileOutputStream("./config/config.txt"),"UTF8"));
                     String url, user, password;
                     url = this.URL;
                     user = this.User;

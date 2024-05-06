@@ -207,7 +207,7 @@ public class JDialogMenuSeleccionarBDDPrimeraVez extends javax.swing.JDialog {
             DataAccessObject.USER = jTextFieldUser.getText();
             DataAccessObject.PASS = jTextFieldPassword.getText();
         try {
-            BufferedWriter escritor = new BufferedWriter(new  OutputStreamWriter(new FileOutputStream("./src/config/config.txt"),"UTF8"));
+            BufferedWriter escritor = new BufferedWriter(new  OutputStreamWriter(new FileOutputStream("./config/config.txt"),"UTF8"));
             String url, user, password;
             url = jTextFieldURL.getText();
             user = jTextFieldUser.getText();
